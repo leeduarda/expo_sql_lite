@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import AnimalService from '../services/animal.service'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Animal } from '../models/animal.model'
+import { ListFormat } from 'typescript';
 
 export default class Home extends React.Component {
 
@@ -83,7 +84,7 @@ export default class Home extends React.Component {
         const animalList = data.map((item, key) => {
             return (
                 <>
-                    <Text >id:{item.id} nome:{item.nome}</Text>
+                    <Text >id: {item.id}  Nome: {item.nome}</Text>
                 </>
             )
         })
@@ -92,27 +93,32 @@ export default class Home extends React.Component {
 
             <View style={styles.container}>
 
-                <Text style={{ fontSize: 20, paddingBottom: 20 }}>Lista de Animais</Text>
+                <Text style={{ fontSize: 30, paddingBottom: 20 }}>Lista de Animais</Text>
                 <TextInput
-                    placeholder="digite o id"
+                    placeholder="Digite o id"
                     style={styles.textInput}
                     onChangeText={text => { this.setState({ value: text }) }}
                     value={value}
                 />
                <View style={styles.containerTouch}>
-                    <TouchableOpacity onPress={() => { value == null ? alert("O campo de id não pode ser vazio") : this.deleteAnimal(value) }} style={{ alignItems: "center", backgroundColor: 'green' }}>
-                        <Icon name="md-remove" size={30} color="white" />
+                    <TouchableOpacity onPress={() => { value == null ? alert("O campo de id não pode ser vazio") : this.deleteAnimal(value) }} style={{ alignItems: "center", backgroundColor: 'red', borderRadius: 5, padding: 5 }}>
+                        <Icon name="trash" size={30} color="white" />
                     </TouchableOpacity>
                 </View>
+
+                <View style={{ padding:15 }}>
+
+                </View>
+
                 <TextInput
-                    placeholder="digite o nome do novo animal"
+                    placeholder="Digite o nome do novo animal"
                     style={styles.textInput}
                     onChangeText={textAdd => { this.setState({ dataInsert: textAdd }) }}
                     value={dataInsert}
                 />
                
                 <View style={styles.containerTouch}>
-                    <TouchableOpacity onPress={() =>  dataInsert == null ? alert("O campo de nome não pode ser vazio") :this.insertAnimal(dataInsert)} style={{ alignItems: "center", backgroundColor: 'green' }}>
+                    <TouchableOpacity onPress={() =>  dataInsert == null ? alert("O campo de nome não pode ser vazio") :this.insertAnimal(dataInsert)} style={{ alignItems: "center", backgroundColor: 'green', borderRadius: 5, padding: 5 }}>
                         <Icon name="md-add" size={30} color="white" />
                     </TouchableOpacity>
                 </View>
@@ -124,8 +130,8 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: '#FFE4C4',
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -135,11 +141,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         width: 200, 
         height: 40, 
+        backgroundColor: '#FFFFE0',
         borderColor: 'gray', 
-        borderWidth: 1 
+        borderWidth: 1,
+        borderRadius: 5,
+        
     },
     containerTouch:{
-        width: 200,
-         padding: 10
+        width: 220,
+        padding: 10,     
     }
 });
